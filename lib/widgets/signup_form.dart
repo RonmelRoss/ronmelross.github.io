@@ -16,7 +16,7 @@ class _SignUpFormState extends State<SignUpForm> {
   double _formProgress = 0;
 
   void _showWelcomeScreen() {
-    Navigator.of(context).pushNamed('/dashboard');
+    Navigator.of(context).pushNamed('/welcome');
   }
 
   void _updateFormProgress() {

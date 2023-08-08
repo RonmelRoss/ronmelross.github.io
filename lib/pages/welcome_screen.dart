@@ -7,8 +7,28 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child:
-            Text('Welcome!', style: Theme.of(context).textTheme.displayMedium),
+        child: Column(children: [
+          Text('Welcome!', style: Theme.of(context).textTheme.displayMedium),
+            TextButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.resolveWith(
+                    (Set<MaterialState> states) {
+                  return states.contains(MaterialState.disabled)
+                      ? null
+                      : Colors.white;
+                }),
+                backgroundColor: MaterialStateProperty.resolveWith(
+                    (Set<MaterialState> states) {
+                  return states.contains(MaterialState.disabled)
+                      ? null
+                      : Colors.blue;
+                }),
+              ),
+              onPressed: () => {
+                Navigator.of(context).pushNamed('/dashboard')
+              },
+              child: const Text('Go to dashboard'))
+        ],)
       ),
     );
   }
