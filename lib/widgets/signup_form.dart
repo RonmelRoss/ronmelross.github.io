@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lab_one/Account/animated_progress_indicator.dart';
+import 'package:lab_one/widgets/animated_progress_indicator.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm();
@@ -16,7 +16,7 @@ class _SignUpFormState extends State<SignUpForm> {
   double _formProgress = 0;
 
   void _showWelcomeScreen() {
-    Navigator.of(context).pushNamed('/welcome');
+    Navigator.of(context).pushNamed('/dashboard');
   }
 
   void _updateFormProgress() {
