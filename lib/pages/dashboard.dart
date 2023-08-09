@@ -2,6 +2,7 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:lab_one/main.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -24,6 +25,9 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 2:
         page = DataTablePage();
+        break;
+      case 3:
+        page = DataChartPage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
@@ -50,6 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     NavigationRailDestination(
                       icon: Icon(Icons.table_chart_outlined),
                       label: Text('Table'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.bar_chart_outlined),
+                      label: Text('Charts'),
                     ),
                   ],
                   selectedIndex: selectedIndex,
@@ -234,4 +242,42 @@ class BigCard extends StatelessWidget {
       ),
     );
   }
+}
+
+
+class DataChartPage extends StatelessWidget {
+  final List<SalesData> data = [
+    SalesData('Product A', 5),
+    SalesData('Product B', 25),
+    SalesData('Product C', 40),
+    SalesData('Product D', 10),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+
+    final chart = charts.BarChart([
+        charts.Series(
+          id: 'Sales',
+          data: data,
+          domainFn: (data, _) => data.product,
+          measureFn: (data, _) => data.amount,
+        )
+      ]
+    );
+
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Chart Example'),
+        ),
+        body: Center(child: chart),
+    );
+  }
+}
+
+class SalesData {
+  final String product;
+  final int amount;
+
+  SalesData(this.product, this.amount);
 }
