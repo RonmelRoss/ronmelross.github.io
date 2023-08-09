@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lab_one/widgets/animated_progress_indicator.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm();
@@ -92,5 +94,23 @@ class _SignUpFormState extends State<SignUpForm> {
         ],
       ),
     );
+  }
+}
+
+Future<void> fetchData() async {
+  // NOTE: Add token here
+  const token = '';
+
+  // NOTE: Update URL endpoint here
+  final response = await http.get(Uri.parse('https://localhost:7208/api/campaign/4ecc9199-6c28-45eb-ffec-08db93f58b2b'),
+    headers: {
+      'Authorization': 'Bearer $token',
+    });
+
+  if (response.statusCode == 200) {
+    final jsonData = json.decode(response.body);
+    print('Parsed JSON Data: $jsonData');
+  } else {
+    print('API Request failed with status code: ${response.statusCode}');
   }
 }
